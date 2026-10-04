@@ -14,6 +14,7 @@ Greetings! Welcome back. We're pretty much halfway done with Docker now. Well, 1
 ## Day 43: Docker Ports Mapping
 ## Day 42: Create a Docker Network
 
+Keep the streak alive!
 
 ## Day 41: Write a Docker File
 
