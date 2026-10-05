@@ -12,6 +12,9 @@ Greetings! Welcome back. We're pretty much halfway done with Docker now. Well, 1
 ## Day 45: Resolve Dockerfile Issues
 ## Day 44: Write a Docker Compose File
 ## Day 43: Docker Ports Mapping
+
+Probably going to knock out another 3 of these today. 
+
 ## Day 42: Create a Docker Network
 
 Keep the streak alive!
