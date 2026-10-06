@@ -11,13 +11,18 @@ Greetings! Welcome back. We're pretty much halfway done with Docker now. Well, 1
 ## Day 46: Deploy an App on Docker Containers
 ## Day 45: Resolve Dockerfile Issues
 ## Day 44: Write a Docker Compose File
+
+
+
 ## Day 43: Docker Ports Mapping
 
-Probably going to knock out another 3 of these today. 
+Port mapping! I believe this is when you map a port on your host machine to a port on the container machine. In this label, we'll pull down the image `nginx:stable`, create a container named `blog` using that image, and then map host port 6000 to the container port 80. We can use the `docker pull nginx:stable` command, then `docker run -d -p 6000:80 --name blog nginx:stable` to finish off the lab. You can use the `docker images` and `docker ps` commands to make sure the correct image was pulled and the container is running, respectively. 
+
+Press the check mark and received a succcess message! That was pretty straightforward. I double checked the dockerdocs for this but I was able to do this solo. 
 
 ## Day 42: Create a Docker Network
 
-OKay today is all about Docker networking. The funny thing about this is I have a background in networking and I dont know much of anything about Docker networking. For this lab, we'll be creating docker networks for different environments. We need to create a docker network named `official`, configure it to use `macvlan` drivers, and then set the subnet and IP ranges as `172.168.0.0/24`. Why are those two different things, I do not know. I'm going to try to google this before using AI. 
+Okay today is all about Docker networking. The funny thing about this is I have a background in networking and I dont know much of anything about Docker networking. For this lab, we'll be creating docker networks for different environments. We need to create a docker network named `official`, configure it to use `macvlan` drivers, and then set the subnet and IP ranges as `172.168.0.0/24`. Why are those two different things, I do not know. I'm going to try to google this before using AI. 
 
 Looking at the dockerdocs (didnt know this was a thing), I'm seeing the `docker network create` command with the all the flags listed here. I see the --ip-range flag, --subnet flag, and id flag for drivers. I'm going to go ahead and try `docker network create -d macvlan --subnet 172.168.0.0/24 --ip-range 172.168.0.0/24 official`. Wow it actually accepted that. Lets find out how to verify that it has been created. I googled and found `docker network ls`. You can also do `docker network inspect <network_name>` to see the detailed version. I did that and I can see the subnet and IPRange lines. It also confirms the Driver and name. I think we're good here. 
 
