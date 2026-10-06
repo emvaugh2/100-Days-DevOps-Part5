@@ -9,9 +9,14 @@ Greetings! Welcome back. We're pretty much halfway done with Docker now. Well, 1
 ## Day 48: Deploy Pods in Kubernetes Cluster
 ## Day 47: Docker Python App
 ## Day 46: Deploy an App on Docker Containers
+
+
+
 ## Day 45: Resolve Dockerfile Issues
 
+For this lab, the Dockerfile build is displaying an error so we need to fix that. So I searched for the Dockerfile and right off the back, I noticed the first line says IMAGE httpd:2.4.43. I know this should say FROM instead. So lets change that. I ran a `docker build` and ran into the error with one of the `sed` commands. Looks like I may need single quotation marks here instead of double quotation marks. I'm going to change that and try it again. Okay that actually wasnt the issue. There was a glaring issue right in my face that I missed :-). All the sed commands had ADD in front of them instead of RUN. I changed it and the docker image was able to be built. 
 
+I received the green check mark. Nice. 
 
 ## Day 44: Write a Docker Compose File
 
