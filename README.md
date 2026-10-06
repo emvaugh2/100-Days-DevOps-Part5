@@ -10,9 +10,27 @@ Greetings! Welcome back. We're pretty much halfway done with Docker now. Well, 1
 ## Day 47: Docker Python App
 ## Day 46: Deploy an App on Docker Containers
 ## Day 45: Resolve Dockerfile Issues
+
+
+
 ## Day 44: Write a Docker Compose File
 
+Okay I haven't worked with Docker Compose or Docker Swarm in about 2 years so we'll be doing a refresher here. With Docker Compose, you can basically automate your Docker commands configurations. It's like an Ansible playbook. You create a YAML file with the specifications that you want for your container and you deploy the YAML file. You can reuse this file over and over so it makes deployment easier. Seems like Docker, Ansible, and Kubernetes are all found of YAML so lets get the format down. 
 
+I asked AI for a Docker Compose refresher and they gave me a general format for a simple Compose file. So in our lab, we need to grab the `httpd:latest` image, name the container httpd, map port 3001 on the host to port 80 on the container, and then map one of the container's directories to the host's directories. It'll look something like this:
+
+services:
+  service-name:
+    image: httpd:latest
+    container_name: httpd
+    ports:
+      - "3001:80"
+    volumes:
+      - /opt/sysops:/usr/local/apache2/htdocs
+
+Once you pull the image, verify it's on your system using `docker images`. Then, create your file. You can validate your YAML file using `docker compose -f <file_path> config`. I didn't see an error message so we'll use `docker compose -f <file_path> up -d` to start the container. The -f flag specifies which YAML file to use. The -d flag is for detached. The up argument says create and start the services defined in the file. You should get a confirmation saying your container was created and you can check using `docker ps` or `docker compose -f <file_path> ps`. 
+
+Lastly since this is Apache, you can do a curl on the localhost to the mapped port to make sure you received some HTML back. That completes this lab!
 
 ## Day 43: Docker Ports Mapping
 
