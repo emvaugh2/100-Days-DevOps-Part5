@@ -5,9 +5,27 @@ Greetings! Welcome back. We're pretty much halfway done with Docker now. Well, 1
 
 
 ## Day 50: Set Resource Limits in Kubernetes Pods
+
+
+
 ## Day 49: Deploy Applications with Kubernetes Deployments
+
+
+
 ## Day 48: Deploy Pods in Kubernetes Cluster
+
+
+
 ## Day 47: Docker Python App
+
+Alright lets knock out the FINAL Docker lab. Ready? Lets go!
+
+There's a Python app that the lab automatically made for us with a requirements.txt file. We need to create an image using this Python script and the requirements. We can use any python base image and we need to expose port 5002. Lastly, we need to automatically run the script when the container starts. Once we create the image, we need to run the container and bind the host port 8099 to container port 5002. We'll do a curl test to make sure we receive the correct message. 
+
+Luckily for me, I've already created a few different Python scripts with a requirements.txt file and the accompanying Dockerfile. They're in my GitHub repos so I copied one of those and changed out the details. After that, we can use the `docker build`, `docker images`, `docker run`, and `docker ps` commands for create the image, verify image creation, run the container, and verify the container is running. Finally, I did the curl test on port 8099 and received the correct output. I'm going to submit the lab now. 
+
+Got the green check! S/o to my GitHub repos. Okay now we move on to Kubernetes!
+
 ## Day 46: Deploy an App on Docker Containers
 
 We'll be testing the deployment of an app using a Docker Compose file. We need to create the compose file and have it deploy a web and a DB service. Each service should deploy a container with the following details:
