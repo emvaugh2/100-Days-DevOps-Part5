@@ -10,6 +10,45 @@ Greetings! Welcome back. We're pretty much halfway done with Docker now. Well, 1
 ## Day 47: Docker Python App
 ## Day 46: Deploy an App on Docker Containers
 
+We'll be testing the deployment of an app using a Docker Compose file. We need to create the compose file and have it deploy a web and a DB service. Each service should deploy a container with the following details:
+
+Web service - name: php_apache, image php with any apache tag, port binding 3001:80, and mount binding. 
+DB service - name: mysql_apache, image mariadb:latest, port mapping 3306:3306, and mount binding. 
+
+Set MYSQL_DATABASE=database_apache and use a custom user with a password for DB connections. Test the app using a curl test on port 3001. 
+
+services:
+  # 1. WEB SERVICE
+  web:
+    image: php:apache
+    container_name: php_apache
+    ports:
+      - "3001:80"
+    volumes:
+      - /var/www/html:/var/www/html
+
+
+  # 2. DATABASE SERVICE
+  db:
+    image: mariadb:latest
+    container_name: mysql_apache
+    ports:
+      - "3306:3306"
+    environment:
+      # Mandatory root password for administrative access
+      MYSQL_ROOT_PASSWORD: "WhatWouldJesusDo!?!5"
+      # Automated creation of your application's database, user, and password
+      MYSQL_DATABASE: database_apache
+      MYSQL_USER: edward
+      MYSQL_PASSWORD: "ILoveGodDoYouLoveGod?!?3"
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+
+
+
+Okay I ended up with the above code by copying someone else's work. I had to change the DB environment variables to fit MySQL instead of Postgres though. I'm asking AI to check my answer. It told me to put my passwords in quotation marks. I went and created my compose file and used `docker compose -f <file_path> config` to validate my file. Lastly, we'll run the same command but with the `up -d` options. It pulled the correct images and it says my containers were created. Use the usual validation checks `docker images` and `docker ps` to make sure the containers are running. I'm going to go ahead and submit my lab now. Oh wait I still need to run my curl test. I ran `curl -i http://localhost:3001/` and received a Welcome to xFusionCorp Industries! message with the HTTP 200 OK result. 
+
+Green check! Lets move to our final Docker lab. 
 
 
 ## Day 45: Resolve Dockerfile Issues
