@@ -6,15 +6,65 @@ Greetings! Welcome back. We're pretty much halfway done with Docker now. Well, 1
 
 ## Day 50: Set Resource Limits in Kubernetes Pods
 
+We've finally reached the halfway mark of the challenge! That was fast. Lets knock it out. For this lab, we need to create a pod named `httpd-pod` with a specific container name and image. Here are the resource limits: Requests: Memory: 15Mi, CPU: 100m. Limits: Memory: 20Mi, CPU: 100m. 
 
+Now, once again, I know how to do this in a deployment.yaml file but I never set this in a kubectl run command so let me look this up. I found out how to update a pod to use the resource limits but not how to automatically deploy these parameters when provisioning the pod. Going to rely on AI for this one as well. 
+
+UPDATE: AI told me to use a pod manifest file. It looks like a deployment file but instead for the `kind: ` field, you'll put Pod instead of Deployment. This will make sure the pod is designed specifically how you wanted it to be instead of the name being determined based on deployment factors. 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: httpd-pod
+spec:
+  containers:
+    - name: httpd-container
+      image: httpd:latest
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "200m"
+          memory: "256Mi"
+
+It looks the same but this got the results I was looking for. Nice. I'll have to keep this in mind. 
 
 ## Day 49: Deploy Applications with Kubernetes Deployments
 
+We'll sneak in another one since the first lab was pretty easy. Now, we'll use a deployment file to create a pod. I actually just used the previous deployment.yaml file from the last lab that didn't work. It worked this time though. Here's the code:
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx_app
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: nginx_app
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+Easy enough. Lets move onto Day 50. 
 
 ## Day 48: Deploy Pods in Kubernetes Cluster
 
+Now for the fun stuff! I've been working with Kubernetes (K8s) for a while now so this will help me cement my skills. The next 20 days are all based on this so I'm going to go back to doing 1 or 2 a day instead of 3. 
 
+We need to create a pod named pod-nginx using the nginx:latest image. We set the app label to nginx_app and we'll name the container nginx-container. We already have kubectl installed on our jumpbox. 
+
+A swift look at the K8s documents says we can use `kubectl create` to complete this task. Alright I was struggling with that so I found a default `nginx` deployment.yml file and just put my information into it. I had to fix the formatting. Once I did that, I used `kubectl apply -f <file_path>` and then `kubectl get pod` and `kubectl describe pod` to make sure the pod was running. I'm going ask AI if there's another way to go about doing this. Since the name didn't match the exact value in the lab, I didn't pass this. So I'm going to find a way to create the pod from the CLI instead of a deployment file. 
+
+UPDATE: I was given the command `kubectl run pod-nginx --image=nginx:latest --labels="app=nginx_app"`. This is basically the same as the `docker run` command. Duly noted. 
 
 ## Day 47: Docker Python App
 
